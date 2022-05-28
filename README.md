@@ -29,7 +29,17 @@ In this project, we worked on simulated data using the Level-Correlated Model (L
 1. We assume that we have a population of size **P** subjected to an advertising campaign on **J** devices. Furthermore, we assume that the population can be partioned into **K** classes that represent, for example, socio-demographic classes. That is, each individual in the population belongs to a class $k \in [1,K]$. We will note **$\alpha_k$** the proportion of individuals of class K.
 2. To simulate the data, we start by uniformly assigning a class k to each user. We then obtain a vector **Z** of size P such that "Z[i]=k" means that the i-th user is of class k. We then obtain the true proportions of the classes in the population.
 3. Then, we will create the cookie matrix: we first generate K positive semidefinite matrices $\Sigma_1, \dots, \Sigma_K$ of size J. We then generate $\gamma_{k1},\dots,\gamma_{kJ}$ according to $\mathcal{N}(0,\Sigma^k)$. 
-4. Finally, if the individual u is of type k, we generate **$N_{uj}** - the number of cookies received by u on the device j - by $\mathcal{P}(\theta_{kj}:=exp(\gamma_{kj})$. We will note 
+4. Finally, if the individual u is of type k, we generate **$N_{uj}$** - the number of cookies received by u on the device j - by $\mathcal{P}(\theta_{kj}:=exp(\gamma_{kj}))$.
+5. In order to have a more realistic reach, we decided to add a random (uniform) weight $\eta$ on a Dirac in 0 for all user u on class k in the device j : $N_{uj} \sim \eta_{kj}+\delta_0 +(1-\eta_{kj})\mathcal{P}(\theta_{kj})$.
 
+# A new approach using the Gibbs-Sampler : Without Panelist
+
+This is the pseudo-code of the algorithm we used :
+
+```
+Input : P,J,K,a,b,N_{tab}, N_{iter}, N_{test}
+Ouput : Cookies Matrix and estimated parameter $\theta,\alpha, Z$
+puts markdown.to_html
+```
 
 
