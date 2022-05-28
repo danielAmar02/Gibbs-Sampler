@@ -50,3 +50,10 @@ Few remarks:
 
 # A new approach using the Gibbs-Sampler : With Panelist
 
+![alt text](https://github.com/danielAmar02/Mediametrie/blob/main/Media/algo_gs_wpan.png)
+
+
+We obtained the result below :
+
+
+![alt text](https://github.com/danielAmar02/Mediametrie/blob/main/Media/R_P%253D300%252CMass0%253D0.85%252CK%253D2%252CJ%253D5%252CHP%253D4%252CM%253D4%252CN%253D15%252Cprop_bi%253D05.png)
