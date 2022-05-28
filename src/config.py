@@ -1,0 +1,12 @@
+J=4 # devices 
+hidden_parameter=2 # bi-panélistes
+K=2 # classes
+P=100 # population
+Mass0=0.5 # Weight en 0 
+a=1 # Parameter of the a priori gamma 
+b=1 # Parameter of the a priori gamma 
+Nmax=5
+beta=1/2 # Parameter of the a priori dirichlet 
+prop_bi=0.5 # proportion of bi-panélistes
+prop_fully=1-prop_bi
+prop_sum=0  # proportion of non paneliste
