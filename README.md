@@ -19,13 +19,17 @@ Here, we propose to explore a new approach using Bayesian statistics and the Gib
 
 
 
-Not only, this gives most accurate estimations of the reach - proportion of users reached by an advertising campaign - but it also allows to have more information.
-
+Not only, this gives most accurate estimations of the reach - proportion of users reached by an advertising campaign - but it also allows to have more information. We obtained 2 main results :
+1. We were able to make an estimation of the reach without research panelist with 20% error on the reach accuracy. Research panelists are member of a panel  and agree to share their data to an audience measurement company. Usually, it is very difficult to recruit such panelists and they often disagree to give all of the data : _e.g_ they might say that they agree to be followed on their TV but not on their laptob. Thus, our estimated reach may not be a good estimation but it is already something new in comparison with google papers which use panelists.
+2. With the use of panelists or bi-panelists (panelists who agree to be followed only on certain devices), we were able to make a significative improvement in comparison with Google papers.
 
 # Simulation of the data 
 
-In this project, we worked on simulated data using the Level-Correlated Model (LCM). The advantage of this model is that it allows to introduce some dependency among devices :
-1. We assume that we have a population of size **P** subjected to an advertising campaign on **J** devices. Furthermore, we assume that the population can be partioned into K classes that represent, for example, socio-demographic classes. That is, each individual in the population belongs to a class $k \in [1,K]$. We will note $\alpha_k$ the proportion of individuals of class K.
+In this project, we worked on simulated data using the Level-Correlated Model (LCM). The advantage of this model is that it allows to introduce some dependencies among devices :
+1. We assume that we have a population of size **P** subjected to an advertising campaign on **J** devices. Furthermore, we assume that the population can be partioned into **K** classes that represent, for example, socio-demographic classes. That is, each individual in the population belongs to a class $k \in [1,K]$. We will note **$\alpha_k$** the proportion of individuals of class K.
+2. To simulate the data, we start by uniformly assigning a class k to each user. We then obtain a vector **Z** of size P such that "Z[i]=k" means that the i-th user is of class k. We then obtain the true proportions of the classes in the population.
+3. Then, we will create the cookie matrix: we first generate K positive semidefinite matrices $\Sigma_1, \dots, \Sigma_K$ of size J. We then generate $\gamma_{k1},\dots,\gamma_{kJ}$ according to $\mathcal{N}(0,\Sigma^k)$. 
+4. Finally, if the individual u is of type k, we generate **$N_{uj}** - the number of cookies received by u on the device j - by $\mathcal{P}(\theta_{kj}:=exp(\gamma_{kj})$. We will note 
 
 
 
