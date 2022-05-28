@@ -246,6 +246,113 @@ def analyse_matrice(Nuj_pred_numpy,Nuj_true_numpy,Z_true,K):
     return pd.DataFrame.from_dict(d)
 
 
+def generate_Nuj(df,theta_hat,Z,K,J,P,S,Isum,df_bench0,df_bench1):
+    Sum_columns=np.array(S)
+    
+    #Isum=list(df[df['J1']==-2]['users'])
+    
+    theta_aux=np.zeros((len(Isum),J))
+    theta_bench0=np.zeros((len(Isum),J))
+    theta_bench1=np.zeros((len(Isum),J))
+    for u in range(len(Isum)):
+      for j in range(J):
+        theta_aux[u][j]=theta_hat[Z[Isum[u]-1]][j]
+        theta_bench0[u][j]=0.01
+        theta_bench1[u][j]=1
+
+        df[Isum[u]-1][j+1]=0
+        df_bench0[Isum[u]-1][j+1]=0
+        df_bench1[Isum[u]-1][j+1]=0
+
+    
+    #for u in range(len(Isum)):
+       #     for j in range(J):
+        #        theta_aux[u][j]=theta_hat[Z[Isum[u]-1]][j]
+         #       df.loc[df['users']==Isum[u],'J'+str(j+1)]=0
+    
+    random_points={}
+    random_points_bench0={}
+    random_points_bench1={}
+    
+    for j in range(J):
+        T=np.sum(theta_aux[:,j])
+        random_points[j]=T*np.random.rand(Sum_columns[j])
+        
+        T_bench0=np.sum(theta_bench0[:,j])
+        random_points_bench0[j]=T_bench0*np.random.rand(Sum_columns[j])
+
+        T_bench1=np.sum(theta_bench1[:,j])
+        random_points_bench1[j]=T_bench1*np.random.rand(Sum_columns[j])
+    
+    for u in range(len(Isum)): #Nouveau
+        for j in range(J):
+          
+            for point in random_points[j]:
+                if np.sum(theta_aux[:u,j]) <= point < np.sum(theta_aux[:u+1,j]):
+                  df[Isum[u]-1][j+1]+=1
+
+            for point in random_points_bench0[j]:
+                if np.sum(theta_bench0[:u,j]) <= point < np.sum(theta_bench0[:u+1,j]):
+                  df_bench0[Isum[u]-1][j+1]+=1
+
+            for point in random_points_bench1[j]:
+                if np.sum(theta_bench1[:u,j]) <= point < np.sum(theta_bench1[:u+1,j]):
+                  df_bench1[Isum[u]-1][j+1]+=1
+
+        
+   # for u in range(len(Isum)):
+    #    for j in range(J):
+     #       for point in random_points[j]:
+      #          if np.sum(theta_aux[:u,j]) <= point < np.sum(theta_aux[:u+1,j]):
+            #       df.loc[res['users']==Isum[u],'J'+str(j+1)]=list(df[df['users']==Isum[u]]['J'+str(j+1)])[0]+1
+                    
+    
+
+        
+def update_z_and_generate_Z_para(alpha,Nuj,theta,P,K,J,users_para):
+    z=np.zeros((P,K))
+    Z=[0 for i in range(P)]
+    for u in range(len(users_para)):
+
+                
+                total=0
+                for k in range(K):
+
+                    thetaaux=theta[k,:]
+                    #z[u,k]= alpha[k]*pmf(Nuj[Nuj['users']==u+1][['J1','J2','J3']].values.tolist()[0],thetaaux)
+                    aux1=np.log(alpha[k])
+                    aux2=pmf_log(Nuj[Nuj['users']==users_para[u]+1][['J' + str(j+1) for j in range(J)]].values.tolist()[0],thetaaux)
+                    z[u,k]= aux1 + aux2
+
+                    #total+= z[u,k]
+               
+                max_zu=np.max(z[u,:])    
+                total=max_zu+scipy.special.logsumexp(z[u,:]-max_zu)
+
+                for k in range(K):
+                    
+                        z[u,k]=mpmath.exp(z[u,k]-total)
+                        #z[u,k]=z[u,k]/total
+                Z[u]=np.random.choice([k for k in range(K)],p=z[u,:],size=1)[0]
+                
+    return z,Z
+        
+def generate_theta_para(K,J,P,Z,n_count,Nuj,a,b,users_para):
+        res=np.zeros((K,J))
+        aux=np.zeros((K,J)) 
+        for u in range(P):
+            for k in range(K):
+                if Z[u]==k:
+                    for j in range(J):
+                        aux[k,j]+=Nuj[Nuj['users']==users_para[u]+1]['J'+str(j+1)].tolist()[0]
+
+        for k in range(K):
+            for j in range(J):
+                res[k,j]=np.random.gamma(a+aux[k,j],1/(b+n_count[k]))
+        return res
+
+
+
     
 
 
