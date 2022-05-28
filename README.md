@@ -8,7 +8,7 @@ In 2013, the World Federation of Advisers launched a call to effectively measure
 However and very quickly, Google answered this call by proposing 3 papers [KSV13](https://research.google/pubs/pub41089/) [KSML16](https://research.google/pubs/pub45353/) [SK19](https://research.google/pubs/pub48387/). Not only the place of Google here invites reflection - Google being also an advertiser, it would become judge and jury - but above all the scientific approach of these papers raises questions [LP19](https://lecueguillaume.github.io/assets/XMM_stage.pdf). In particular, and as explained in this paper [LP19](https://lecueguillaume.github.io/assets/XMM_stage.pdf), the authors of [KSV13](https://research.google/pubs/pub41089/) [KSML16](https://research.google/pubs/pub45353/) [SK19](https://research.google/pubs/pub48387/) implicitly use the very unrealistic hypothesis that the number of times an individual is reached by an advertising campaign on one device is independent of the number of times he is reached by this same campaign on another device.
 
 
-Here, we propose to explore a new approach using Bayesian statistics and the Gibbs-Sampler algorithm. This algorithm has many advantages for Médiamétrie because it allows to reconstitute a matrix that we will call the Cookie Matrix which counts for each user the number of times he has been reached on each device. 
+Here, we propose to explore a new approach using Bayesian statistics and the Gibbs-Sampler algorithm. This algorithm has many advantages for Médiamétrie because it allows to reconstitute a matrix that we will call the Cookie Matrix which counts for each user the number of times he has been reached on each device using the information $c_j$ of the aggregate cookies per devices.
 
 
 | Users ID | Phone | Laptop | TV | $\dots$ | Radio | Total|
@@ -16,6 +16,8 @@ Here, we propose to explore a new approach using Bayesian statistics and the Gib
 | 1 | $n_{1,p}$ | $n_{1,l}$ | $n_{1,t}$ | $\dots$ | $n_{1,r}$ | $n_1:=\sum_k n_{1,k}$|
 | $\dots$ | $\dots$ | $\dots$ | $\dots$ | $\dots$ | $\dots$ | $\dots$ |
 | P | $n_{p,p}$ | $n_{p,l}$ | $n_{p,t}$ | $\dots$ | $n_{p,r}$ | $n_p:=\sum_k n_{p,k}$|
+| Total | $c_p=\sum_{i=1} n_{i,p}$ | $c_l=\sum_{i=1} n_{i,l}$ | $c_t=\sum_{i=1} n_{i,t}$  | $\dots$ | $c_r=\sum_{i=1} n_{i,r}$ | |
+
 
 
 
@@ -36,10 +38,6 @@ In this project, we worked on simulated data using the Level-Correlated Model (L
 
 This is the pseudo-code of the algorithm we used :
 
-```
-Input : P,J,K,a,b,N_{tab}, N_{iter}, N_{test}
-Ouput : Cookies Matrix and estimated parameter $\theta,\alpha, Z$
-puts markdown.to_html
-```
+
 
 
