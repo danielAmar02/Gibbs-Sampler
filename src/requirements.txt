@@ -1,0 +1,13 @@
+numpy 
+pandas 
+matplotlib.pyplot
+random
+scipy
+tqdm
+collections
+mpmath
+seaborn
+time 
+sklearn.metrics.cluster
+scipy.spatial
+sklearn.metrics 
