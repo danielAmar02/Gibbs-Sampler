@@ -42,6 +42,11 @@ This is the pseudo-code of the algorithm we used :
 
 Few remarks:
 - We compared it with a benchmark that fills the cookie matrix with random 0's or 1's and with the Google model (by providing the Google the reach on the panelist)
-- After few simulations, we obtained the results below :
-![alt text](https://github.com/danielAmar02/Mediametrie/blob/main/Media/algo_gs_woutpan.png)
+- After few simulations, we obtained the results below. We see that we do not beat Google benchmark but let's recall that we provided more info to this model as Google can only proceed if it has information from panelists
+- The Gibbs Sampler has an important complexity in $O(N_{tab}N_{iter}N_{test}PJM)$
+
+![alt text](https://github.com/danielAmar02/Mediametrie/blob/main/Media/14.png)
+
+
+# A new approach using the Gibbs-Sampler : With Panelist
 
