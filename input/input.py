@@ -1,3 +1,9 @@
+### Here we are working with simulated data using LCM model. For more information, please check the Readme
+
+## This is the code to generate data
+
+
+
 import src/config
 import numpy as np
 import pandas as pd
