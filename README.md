@@ -38,6 +38,10 @@ In this project, we worked on simulated data using the Level-Correlated Model (L
 
 This is the pseudo-code of the algorithm we used :
 
+![alt text](https://github.com/danielAmar02/Mediametrie/blob/main/Media/algo_gs_woutpan.png)
 
-
+Few remarks:
+- We compared it with a benchmark that fills the cookie matrix with random 0's or 1's and with the Google model (by providing the Google the reach on the panelist)
+- After few simulations, we obtained the results below :
+![alt text](https://github.com/danielAmar02/Mediametrie/blob/main/Media/algo_gs_woutpan.png)
 
